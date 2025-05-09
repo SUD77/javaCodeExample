@@ -1,0 +1,25 @@
+
+ Let's say we're designing a simple application that sends notifications.
+ We might start with a high-level module (NotificationService) that depends on a low-level module (EmailService).
+ However, according to DIP, both should depend on abstractions rather than concrete implementations.
+
+
+-  Without DIP
+
+(Look at the code of Without DIP)
+In this example, the NotificationService (high-level module) depends directly on the EmailService (low-level module),
+which violates DIP.
+
+
+- With DIP
+
+(Look at the code of With DIP)
+In this refactored example:
+
+    - We introduced a MessageService interface that both EmailService and SMSService implement.
+    - The NotificationService depends on the MessageService abstraction rather than a concrete implementation.
+    - The concrete implementation (either EmailService or SMSService) is injected into NotificationService via the constructor.
+
+This way, the high-level module (NotificationService) does not depend on the low-level modules (EmailService or SMSService),
+but both depend on the abstraction (MessageService).
+This adheres to the Dependency Inversion Principle and makes the code more flexible and easier to maintain.
