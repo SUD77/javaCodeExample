@@ -1,0 +1,80 @@
+List of questions to practice with Hints
+
+BEGINNER TO INTERMEDIATE PRACTICE QUESTIONS
+
+1. Print all product names using forEach.
+   Hint: Use forEach(System.out::println) on the productList after mapping to name.
+
+2. Filter and collect all orders where amount > 2000.
+   Hint: filter(order -> order.getAmount() > 2000) then collect to a list.
+
+3. Map products to their names and collect to a Set.
+   Hint: map(Product::getName).collect(Collectors.toSet())
+
+4. Get all distinct product categories.
+   Hint: map(Product::getCategory).distinct()
+
+5. Flatten a list of orders from multiple users into a single list.
+   Hint: Use flatMap(List::stream) if you have List<List<Order>>.
+
+6. Sort products by name (A-Z). Then by price (low to high).
+   Hint: sorted(Comparator.comparing(Product::getName).thenComparing(Product::getPrice))
+
+7. Sort orders by amount in descending order. Get top 3.
+   Hint: sorted(Comparator.comparingDouble(Order::getAmount).reversed()).limit(3)
+
+8. Find the order with the maximum quantity.
+   Hint: max(Comparator.comparingInt(Order::getQuantity))
+
+9. Find the product with the minimum price.
+   Hint: min(Comparator.comparingDouble(Product::getPrice))
+
+10. Group orders by payment method.
+    Hint: Collectors.groupingBy(Order::getPaymentMethod)
+
+11. Find the first product with price above 5000.
+    Hint: filter(p -> p.getPrice() > 5000).findFirst()
+
+12. Find any order placed via POS.
+    Hint: filter(o -> o.getSource().equals("POS")).findAny()
+
+13. Check if any product name contains the word "Smart".
+    Hint: anyMatch(p -> p.getName().contains("Smart"))
+
+14. Check if all products are in "INR" currency.
+    Hint: allMatch(p -> p.getCurrency().equals("INR"))
+
+15. Check if no order was placed with amount 0.
+    Hint: noneMatch(o -> o.getAmount() == 0)
+
+16. Skip the first 3 cheapest products and list the rest.
+    Hint: sorted(byPrice).skip(3)
+
+17. Limit to 5 orders placed via Web.
+    Hint: filter(o -> o.getSource().equals("WEB")).limit(5)
+
+🚀 ADVANCED COMBINATIONS
+
+18. For each category, list the names of products.
+    Hint: groupingBy(Product::getCategory, mapping(Product::getName, toList()))
+
+19. Group orders by product ID and for each group get the total amount.
+    Hint: groupingBy(Order::getProductId, summingDouble(Order::getAmount))
+
+20. Flatten list of product names per category from a Map<String, List<Product>>.
+    Hint: flatMap(entry -> entry.getValue().stream().map(Product::getName))
+
+21. Find top 3 categories with most products.
+    Hint: Group by category, count, then sort by count descending.
+
+22. Get a list of all order IDs in uppercase.
+    Hint: map(o -> o.getOrderId().toUpperCase())
+
+23. Filter orders that are not "CANCELLED", then group by source.
+    Hint: Use filter first, then groupingBy(Order::getSource)
+
+24. Find if any order has quantity more than 5. If so, print details.
+    Hint: filter(o -> o.getQuantity() > 5).findAny()
+
+25. List names of all products sorted by price descending, but skip the most expensive one.
+    Hint: sorted(byPrice.reversed()).skip(1).map(Product::getName)
